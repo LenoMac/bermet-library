@@ -28,7 +28,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div>
-            <button>Войти</button>
+            <button className='button-primary'>Войти</button>
           </div>
         </div>
       </div>
