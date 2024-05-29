@@ -2,17 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "./BookList.css";
 import { toast } from 'react-toastify';
+import { Button, notification } from 'antd';
+import { useGlobalContext } from '../../context.';
 
 const Book = (book) => {
 
-  const occupyBook = () => {
-    toast("Книга занята!")
+  const [api, contextHolder] = notification.useNotification();
+  const { setBookStore, bookStore, uploadBooks } = useGlobalContext()
+  const occupyBook = async () => {
+    try {
+      await uploadBooks()
+      api.info({
+        message: book.title,
+        description: 'Книга занята!',
+        placement: 'top'
+      })
+      setBookStore(book)
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
   return (
     <div className='book-item flex flex-column flex-sb'>
+      {contextHolder}
       <div className='book-item-img'>
-        <img src={book.cover_img} alt="cover" />
+        <img src={book.cover_img} />
       </div>
       <Link to={`/book/${book.id}`} {...book}>
         <div className='book-item-info text-center'>
@@ -41,8 +57,9 @@ const Book = (book) => {
         gap: 10,
         marginTop: 10
       }}>
-        <button className='btn-primary'>Читать</button>
-        <button onClick={() => occupyBook()} className='btn-secondary'>Занять</button>
+        {/* <button className='btn-primary'>Читать</button> */}
+        <Button type='primary'>Читать</Button>
+        <Button onClick={() => occupyBook(book.id)} type='default'>Занять</Button>
       </div>
     </div>
   )
