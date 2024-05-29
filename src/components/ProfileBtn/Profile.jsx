@@ -32,8 +32,9 @@ export default function Profile({ username, userProfile }) {
             type: 'divider',
         },
         {
-            label: <Link onClick={handleLogout} style={{ fontSize: 18, color: 'red' }} to="/">Выйти</Link>,
+            label: <Link onClick={handleLogout} style={{ fontSize: 17 }} to="/">Выйти</Link>,
             key: '3',
+            danger: true,
         },
     ];
 
@@ -42,7 +43,7 @@ export default function Profile({ username, userProfile }) {
             menu={{
                 items,
             }}
-            trigger={["click"]}>
+            trigger={["click", "hover"]}>
             <Space>
                 <Avatar src={userProfile} />
                 <p style={{cursor: 'pointer', userSelect: 'none'}}>{username}</p>

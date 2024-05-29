@@ -22,8 +22,7 @@ const AppProvider = ({ children }) => {
     }
     try {
       await axios.post(
-        "https://api-v2.elchocrud.pro/api/v1/f880a39e4d34450c1d6ca7046609aa32/bookstore",
-        JSON.stringify(bookDeails)
+        "https://api-v2.elchocrud.pro/api/v1/f880a39e4d34450c1d6ca7046609aa32/bookstore", bookDeails
       );
     } catch (e) {
       console.log(e);
@@ -61,6 +60,7 @@ const AppProvider = ({ children }) => {
 
         if (newBooks.length > 1) {
           setResultTitle("Your Search Result");
+          console.log(newBooks);
         } else {
           setResultTitle("No Search Result Found!");
         }

@@ -6,6 +6,7 @@ import logoImg from "../../images/logo.png";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleAuthProvider } from "../../firebase";
 import Profile from "../ProfileBtn/Profile";
+import { Button } from "antd";
 
 const Navbar = () => {
   const { username, setUsername, userProfile, setUserProfile, token } = useGlobalContext()
@@ -25,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar" id="navbar">
-      <div className="container navbar-content flex">
+      <div className="container navbar-content">
         <div className="brand-and-toggler flex flex-sb">
           <Link to="/" className="navbar-brand flex">
             <img src={logoImg} alt="logo" />
@@ -64,12 +65,7 @@ const Navbar = () => {
             {token ? (
               <Profile username={username} userProfile={userProfile} />
             ) : (
-              <button
-                onClick={handleSignInWithGoogle}
-                className="button-primary"
-              >
-                Войти
-              </button>
+              <Button onClick={handleSignInWithGoogle} type="primary" style={{ background: 'purple', fontWeight: "bold" }}>Войти</Button>
             )}
           </div>
         </div>

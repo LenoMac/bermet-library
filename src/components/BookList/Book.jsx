@@ -8,16 +8,16 @@ import { useGlobalContext } from '../../context.';
 const Book = (book) => {
 
   const [api, contextHolder] = notification.useNotification();
-  const { setBookStore, bookStore, uploadBooks } = useGlobalContext()
-  const occupyBook = async () => {
+  const { setBookStore, uploadBooks } = useGlobalContext()
+  const occupyBook = async (thebook) => {
     try {
       await uploadBooks()
       api.info({
-        message: book.title,
+        message: thebook.title,
         description: 'Книга занята!',
         placement: 'top'
       })
-      setBookStore(book)
+      setBookStore(thebook)
     }
     catch (e) {
       console.log(e);
@@ -59,7 +59,7 @@ const Book = (book) => {
       }}>
         {/* <button className='btn-primary'>Читать</button> */}
         <Button type='primary'>Читать</Button>
-        <Button onClick={() => occupyBook(book.id)} type='default'>Занять</Button>
+        <Button onClick={() => occupyBook(book)} type='default'>Занять</Button>
       </div>
     </div>
   )
